@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Binária</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+        }
+        input, select, button {
+            margin: 10px;
+            padding: 10px;
+            width: 80%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        h1 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora Binária</h1>
+        <!-- Calculadora -->
+        <div>
+            <h3>Operação Binária</h3>
+            <input type="text" id="binary1" placeholder="Número Binário 1">
+            <input type="text" id="binary2" placeholder="Número Binário 2">
+            <select id="operation">
+                <option value="+">Soma</option>
+                <option value="-">Subtração</option>
+                <option value="*">Multiplicação</option>
+                <option value="/">Divisão</option>
+            </select>
+            <button onclick="calculateBinary()">Calcular</button>
+            <p id="binaryResult">Resultado: </p>
+        </div>
+        <hr>
+        <!-- Conversor -->
+        <div>
+            <h3>Conversor</h3>
+            <input type="text" id="convertInput" placeholder="Digite o número">
+            <select id="convertType">
+                <option value="toDecimal">Binário para Decimal</option>
+                <option value="toBinary">Decimal para Binário</option>
+            </select>
+            <button onclick="convert()">Converter</button>
+            <p id="convertResult">Resultado: </p>
+        </div>
+    </div>
+
+    <script>
+        // Função de calculadora binária
+        function calculateBinary() {
+            const binary1 = document.getElementById("binary1").value;
+            const binary2 = document.getElementById("binary2").value;
+            const operation = document.getElementById("operation").value;
+
+            const num1 = parseInt(binary1, 2); // Converter binário para decimal
+            const num2 = parseInt(binary2, 2);
+            let result;
+
+            switch (operation) {
+                case '+':
+                    result = num1 + num2;
+                    break;
+                case '-':
+                    result = num1 - num2;
+                    break;
+                case '*':
+                    result = num1 * num2;
+                    break;
+                case '/':
+                    result = Math.floor(num1 / num2); // Divisão inteira
+                    break;
+                default:
+                    result = "Operação inválida!";
+            }
+
+            document.getElementById("binaryResult").innerText = `Resultado: ${result.toString(2)}`; // Retornar resultado em binário
+        }
+
+        // Função de conversão
+        function convert() {
+            const input = document.getElementById("convertInput").value;
+            const type = document.getElementById("convertType").value;
+            let result;
+
+            if (type === "toDecimal") {
+                result = parseInt(input, 2); // Binário para decimal
+            } else if (type === "toBinary") {
+                result = Number(input).toString(2); // Decimal para binário
+            } else {
+                result = "Conversão inválida!";
+            }
+
+            document.getElementById("convertResult").innerText = `Resultado: ${result}`;
+        }
+    </script>
+</body>
+</html>
